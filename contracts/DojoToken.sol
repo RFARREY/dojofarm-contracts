@@ -240,7 +240,9 @@ contract DojoToken is BEP20 {
      * Can only be called by the current operator.
      */
     function updateMaxTransferAmountRate(uint16 _maxTransferAmountRate) public onlyOperator {
+        require(_maxTransferAmountRate >= 50, "DOJO::updateMaxTransferAmountRate: Max transfer amount rate should be higher than 50 (0.5%).");
         require(_maxTransferAmountRate <= 10000, "DOJO::updateMaxTransferAmountRate: Max transfer amount rate must not exceed the maximum rate.");
+
         emit MaxTransferAmountRateUpdated(msg.sender, maxTransferAmountRate, _maxTransferAmountRate);
         maxTransferAmountRate = _maxTransferAmountRate;
     }

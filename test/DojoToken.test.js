@@ -172,7 +172,15 @@ contract('DojoToken', ([alice, bob, carol, operator, owner]) => {
 
         await this.dojo.updateMaxTransferAmountRate(100, { from: operator }); // 1%
         assert.equal((await this.dojo.maxTransferAmount()).toString(), '10010');
+
+        await expectRevert(this.dojo.updateMaxTransferAmountRate(49, { from: operator }),
+            'DOJO::updateMaxTransferAmountRate: Max transfer amount rate should be higher than 50 (0.5%).');
+
+        await expectRevert(this.dojo.updateMaxTransferAmountRate(10001, { from: operator }),
+            'DOJO::updateMaxTransferAmountRate: Max transfer amount rate must not exceed the maximum rate.');
+
     });
+
 
     it('anti whale', async () => {
         await this.dojo.transferOperator(operator, { from: owner });
@@ -190,9 +198,10 @@ contract('DojoToken', ([alice, bob, carol, operator, owner]) => {
 
         // total supply: 50,000, max transfer amount: 250
         assert.equal((await this.dojo.maxTransferAmount()).toString(), '250');
-        await expectRevert(this.dojo.transfer(bob, 251, { from: alice }), 'DOJO::antiWhale: Transfer amount exceeds the maxTransferAmount');
-        await this.dojo.approve(carol, 251, { from: alice });
-        await expectRevert(this.dojo.transferFrom(alice, carol, 251, { from: carol }), 'DOJO::antiWhale: Transfer amount exceeds the maxTransferAmount');
+        await expectRevert(this.dojo.transfer(bob, 1001, { from: alice }), 'DOJO::antiWhale: Transfer amount exceeds the maxTransferAmount');
+        await this.dojo.approve(carol, 1001, { from: alice });
+        await expectRevert(this.dojo.transferFrom(alice, carol, 1001, { from: carol }), 'DOJO::antiWhale: Transfer amount exceeds the maxTransferAmount');
+
 
         //
         await this.dojo.transfer(bob, 250, { from: alice });
