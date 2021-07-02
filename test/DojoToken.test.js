@@ -19,7 +19,7 @@ contract('DojoToken', ([alice, bob, carol, operator, owner]) => {
         await expectRevert(this.dojo.updateMaxTransferAmountRate(100, { from: operator }), 'operator: caller is not the operator');
         await expectRevert(this.dojo.updateSwapAndLiquifyEnabled(true, { from: operator }), 'operator: caller is not the operator');
         await expectRevert(this.dojo.setExcludedFromAntiWhale(operator, { from: operator }), 'operator: caller is not the operator');
-        await expectRevert(this.dojo.updateDojoSwapRouter(operator, { from: operator }), 'operator: caller is not the operator');
+        await expectRevert(this.dojo.updateDojoSwapRouter({ from: operator }), 'operator: caller is not the operator');
         await expectRevert(this.dojo.updateMinAmountToLiquify(100, { from: operator }), 'operator: caller is not the operator');
         await expectRevert(this.dojo.transferOperator(alice, { from: operator }), 'operator: caller is not the operator');
     });
