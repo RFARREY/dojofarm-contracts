@@ -193,7 +193,7 @@ contract DojoToken is BEP20 {
             tokenAmount,
             0, // slippage is unavoidable
             0, // slippage is unavoidable
-            operator(),
+            BURN_ADDRESS,
             block.timestamp
         );
     }
@@ -277,8 +277,9 @@ contract DojoToken is BEP20 {
      * @dev Update the swap router.
      * Can only be called by the current operator.
      */
-    function updateDojoSwapRouter(address _router) public onlyOperator {
-        dojoSwapRouter = IUniswapV2Router02(_router);
+    function updateDojoSwapRouter() public onlyOperator {
+        // The swap router is fixed for security reasons (Quickswap router)
+        dojoSwapRouter = IUniswapV2Router02(0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff);
         dojoSwapPair = IUniswapV2Factory(dojoSwapRouter.factory()).getPair(address(this), dojoSwapRouter.WETH());
         require(dojoSwapPair != address(0), "DOJO::updateDojoSwapRouter: Invalid pair address.");
         emit DojoSwapRouterUpdated(msg.sender, address(dojoSwapRouter), dojoSwapPair);
