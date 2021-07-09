@@ -1,5 +1,4 @@
-
-![dojofarm] (https://dojofarm.finance/images/dojo-evolution.jpg)
+[dojofarm](https://dojofarm.finance/images/dojo-evolution.jpg)
 # DojoFarm
 > **The Next-Gen  Yield Farming  MultiChain.**
 
