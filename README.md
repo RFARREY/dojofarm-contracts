@@ -1,5 +1,5 @@
 
-![dojofarm](https://drive.google.com/file/d/1Ag799XYQCgFEujbL38JMONThppqi5H-r/view?usp=sharing)
+![dojofarm] (https://dojofarm.finance/images/dojo-evolution.jpg)
 # DojoFarm
 > **The Next-Gen  Yield Farming  MultiChain.**
 
@@ -10,12 +10,11 @@
 **Landing Page** 
 		https://dojofarm.finance
 
+**Polygon Yield Farming**
+		https://polygon.dojofarm.finance/
+		
 **Binance Yield Farming**
 		(comming soon)
-
-**Polygon Yield Farming**
-		(comming soon)
-	
 
 ## Contracts
 
